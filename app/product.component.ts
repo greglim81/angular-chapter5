@@ -2,20 +2,14 @@ import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'product',
-    template: `
+    template: ` 
         <div class="media">
-            <div class="media-left">
-                <a href="#">
-                <img class="media-object" src="{{ data.imageUrl }}">
-                </a>
-            </div>
+            <img src="{{ data.imageUrl }}" class="mr-3" alt="...">
             <div class="media-body">
-                <h4 class="media-heading">
-                    {{ data.productName }}  
-                </h4>                
-                {{ data.releasedDate | date }} 
+                <h5 class="mt-0">{{ data.productName }}</h5>
+                {{ data.releasedDate | date | uppercase  }}
                 <rating 
-                    [rating-value]="data.rating" 
+                    [rating]="data.rating" 
                     [numOfReviews]="data.numOfReviews">
                 </rating>
                 <div [ngSwitch]="data.rating">
@@ -25,20 +19,18 @@ import {Component, Input} from '@angular/core';
                     <div *ngSwitchCase="4">Very Good</div>
                     <div *ngSwitchCase="5">Excellent</div>
                     <div *ngSwitchDefault>Not Rated</div>
-	            </div>                
+	            </div>                   
                 <br>                                            
-                {{ data.description | truncate}}
+                {{ data.description | truncate: 10}}                
             </div>
         </div>    
     `,
-    styles: [`
+    styles: [` 
         .media {
             margin-bottom: 20px;
-        }                       
+        }                      
     `]    
 })
 export class ProductComponent {
     @Input() data;    
 }
-
-// | formatString
